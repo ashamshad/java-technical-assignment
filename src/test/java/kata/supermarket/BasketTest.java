@@ -29,7 +29,8 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
-                multipleItemsPricedByWeight()
+                multipleItemsPricedByWeight(),
+                multipleItemsWithBuyOneGetOneFreePackOfDigestive()
         );
     }
 
@@ -48,6 +49,14 @@ class BasketTest {
                 Arrays.asList(aPackOfDigestives(), aPintOfMilk()));
     }
 
+    private static Arguments multipleItemsWithBuyOneGetOneFreePackOfDigestive() {
+        return Arguments.of("multiple items priced per unit, with one item with buy one get one free discount", "2.04",
+                Arrays.asList(
+                        aPackOfDigestivesWithBuyOneGetOneFreeDiscount(),
+                        aPackOfDigestivesWithBuyOneGetOneFreeDiscount(),
+                        aPintOfMilk()));
+    }
+
     private static Arguments aSingleItemPricedPerUnit() {
         return Arguments.of("a single item priced per unit", "0.49", Collections.singleton(aPintOfMilk()));
     }
@@ -62,6 +71,12 @@ class BasketTest {
 
     private static Item aPackOfDigestives() {
         return new Product(new BigDecimal("1.55")).oneOf();
+    }
+
+    private static Item aPackOfDigestivesWithBuyOneGetOneFreeDiscount() {
+        Item item = new Product(new BigDecimal("1.55")).oneOf();
+        item.setDiscount(Discount.BUY_ONE_GET_ONE_FREE);
+        return item;
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {

@@ -2,7 +2,7 @@ package kata.supermarket;
 
 import java.math.BigDecimal;
 
-public class ItemByWeight implements Item {
+public class ItemByWeight extends Item {
 
     private final WeighedProduct product;
     private final BigDecimal weightInKilos;
